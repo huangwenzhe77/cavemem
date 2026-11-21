@@ -1,0 +1,23 @@
+# Run from a trusted Terminal-Bench 2.0 cache with a matching Enroot image.
+# Serve the specified base Qwen weights under this alias on localhost first.
+model:
+  model_name: openai/Qwen2.5-7B
+  api_base: http://127.0.0.1:8000/v1
+  api_key: local-placeholder
+  parser_name: xml
+  temperature: 0
+  max_turns: 4
+  enable_summarize: false
+  record_terminal_session: false
+memory:
+  enabled: false
+enroot:
+  sqsh_dir: ./outputs/sqsh
+  data_dir: ./outputs/enroot
+run:
+  adapter_type: harbor
+  task_names: [regex-log]
+  cave_capture: true
+  cave_seed: 42
+  output_dir: ./outputs/cave-harbor
+  n_parallel: 1

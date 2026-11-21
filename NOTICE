@@ -1,0 +1,11 @@
+CAVE-Mem
+
+This distribution includes code derived from Proactive Memory Agent
+(https://github.com/yifannnwu/proactive-memory-agent, revision 89e5c0d).
+CAVE-Mem adds its own replay, memory admission, data collection, and policy
+modules and modifies packaging, configuration, runner, and task adapters.
+
+The vendored external/harbor package is derived from Harbor
+(https://github.com/harbor-framework/harbor). See its accompanying license.
+
+This distribution is provided under the Apache License, Version 2.0.

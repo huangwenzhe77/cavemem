@@ -1,0 +1,23 @@
+{
+  "benchmark": "Terminal-Bench 2.0, six-task engineering pilot",
+  "commit": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "splits": {
+    "source": ["regex-log", "cancel-async-tasks"],
+    "train": ["polyglot-c-py", "regex-chess"],
+    "validation": ["constraints-scheduling"],
+    "test": ["log-summary-date-ranges"]
+  },
+  "choices": "CPU text/code tasks with offline official verification and cloneable /app artifacts. Roles fixed before fresh actor outputs. Earlier regex-log baseline is development history only.",
+  "actor": "Qwen2.5-7B",
+  "teacher": "gpt-6-sol",
+  "interface": "One transient Bash batch per proposal in a network-isolated official task image. /app persists. Minimal action envelope without worked task examples. Terminal completion requires two consecutive done flags. Protocol distinct from the prior XML baseline.",
+  "turns": 5,
+  "max_output_tokens": 1024,
+  "seeds": [86231, 86232, 86233],
+  "source": "One candidate per failed source trajectory. Paired K=3 from cached draft with the same suffix seeds. Original, direct correction, textual revision. Evidence requires both direct and textual mean utility gains to have positive 95% paired t lower bounds, as in CAVE v2. Original proposal cost paid in all arms. Direct correction preserves the draft done flag.",
+  "target": "Freeze bank. First applicable checkpoint per game, original draft saved prior to retrieval. Do not require apparent exposure. Run both arms from identical /app state and visible history; terminal success from original tests. With fewer than four training pairs or absent validation support, learned gate abstains. Retain unmatched games in denominator.",
+  "cost": {"per_1000_tokens": 0.01, "per_env_step": 0.001, "per_minute": 0.01},
+  "time": "model generation and actor command execution seconds; excludes offline scoring, snapshot operations, model initialization, transport and teacher",
+  "target_completion": "Natural and both target arms use greedy decoding. Remind pays for exactly one redraft. Source K samples redraft and suffix with temperature .7 and top_p .95.",
+  "applicability": {"artifact_work": "public task requires creating/modifying an artifact", "regex_work":"public task mentions regex or regular expression", "python_work":"public task mentions Python, .py or async", "log_aggregation":"public task mentions logs or log files"}
+}

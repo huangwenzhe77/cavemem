@@ -1,0 +1,16 @@
+{
+  "protocol": "Terminal-Bench 2.0 fixed-six file-completion actor, exploratory interface contrast",
+  "splits": {"source": ["polyglot-c-py","regex-log","cancel-async-tasks"], "train": ["regex-chess"], "validation": ["constraints-scheduling"], "test": ["log-summary-date-ranges"]},
+  "roles": "All 6 tasks previously exposed as development tasks; log-summary is disjoint within this experiment, not pristine benchmark evidence.",
+  "actor": "frozen Qwen2.5-7B base, raw few-shot file-completion text with prefilled code fence, official task and public file previews, no worked solution or tests",
+  "teacher": "gpt-6-sol, failed source only; selects checkpoint and proposes one direct replacement and one short textual advisory plus a visible task-type condition. Source-only teacher sees public task, snapshot feedback, source final success. No target answers or hidden tests.",
+  "seeds": [243001,243002,243003],
+  "max_tokens_per_call": 1152,
+  "limit": 4,
+  "caps": [2,4],
+  "budget": "Each arm pays for cached original proposal. Reminder consumes a second actor call before execution of revised draft. A KEEP action seals a previous artifact. Both caps are externally truncated common-prefix experiments, with the corresponding cloned artifact graded separately using untouched official tests.",
+  "source_verification": "K=3 shared continuation seeds, temperature .7 and top_p=.95; original action at intervention is cached; teacher-forced action charged original draft but no extra actor call, textual revision charged. Predeclared cap4 eligibility requires at least one text rescue and more text rescues than regressions, with positive mean utility gain, OR all three pairs dual-success with positive mean utility gain. Direct evidence reported separately, never sufficient for verified text. Report t95 about the paired differences, counts and estimates as exploratory.",
+  "target": "Evaluate each verified matching source card on first naturally drafted action before execution for each target task. Keep all candidates and natural outcomes, including correct cached drafts. Both target arms greedy; 2 and 4 calls share prefixes; no teacher assistance. Each task's multiple memories and caps are repeated measures. If no verified text, report actual blocked verified stage and independent unverified exploratory direct/text diagnostic using all source candidates with positive local direct evidence; flag separately.",
+  "cost": {"per_1000_tokens":0.01,"per_step":0.001,"per_minute":0.01},
+  "time": "model generation plus isolated command execution; concurrent GPU with condition 01 may affect times. Snapshot, offline verifier and transport excluded."
+}

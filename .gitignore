@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.uv/
+uv.lock
+
+# Runtime output
+logs/
+outputs/
+wandb/
+.cache/
+*.sqsh
+*.log
+
+# Editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Env
+.env
+.env.local
+.env.*
+*.safetensors
+*.sqsh
+
+# Terminal pilot outputs and downloaded official inputs
+/experiments/*/initial-drafts/
+/experiments/*/natural/
+/experiments/*/source/
+/experiments/*/target/
+/experiments/*/bank.json
+/experiments/*/summary.json
+/experiments/*/audited-results.json
+/experiments/*/frozen-gate.json
+/experiments/cave-tb-pilot-01/assets/runtime.json
+/experiments/cave-tb-pilot-01/assets/regex-log/
+/experiments/cave-tb-pilot-01/assets/regex-chess/
+/experiments/cave-tb-pilot-01/assets/cancel-async-tasks/
+/experiments/cave-tb-pilot-01/assets/polyglot-c-py/
+/experiments/cave-tb-pilot-01/assets/constraints-scheduling/
+/experiments/cave-tb-pilot-01/assets/log-summary-date-ranges/

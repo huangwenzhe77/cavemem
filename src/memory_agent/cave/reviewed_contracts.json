@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "contracts_by_candidate_digest": {
+    "3aedffe1e24aa05d8721fe95744c69cc227c266c15c1c226b72c96a259249081": "all-records-ascending-after-ASC/v1"
+  }
+}
