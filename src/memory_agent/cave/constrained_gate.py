@@ -26,7 +26,7 @@ def upper(weights, v, q):
     return float(means[index]), weights[index]
 
 
-def optimize(X, gain, harm, extra, initial, cutoff, limits, eta, config=CONFIG):
+def optimize(X, gain, harm, extra, initial, cutoff, limits, eta, config=CONFIG, *, clusters=None):
     n = len(X)
     require(n >= 2 and X.shape[0] == len(gain) == len(harm) == len(extra)
             and set(harm.tolist()) <= {0, 1} and all(np.isfinite(a).all() for a in (X, gain, extra)),
@@ -36,7 +36,16 @@ def optimize(X, gain, harm, extra, initial, cutoff, limits, eta, config=CONFIG):
     require(budget > 0 and 0 < delta < 1, "invalid risk/cost limits")
     scale = extra / budget
     rng = np.random.default_rng(config["seed"])
-    weights = rng.multinomial(n, np.full(n, 1/n), size=config["bootstrap"]) / n
+    if clusters is None:
+        clusters = np.arange(n)
+    require(len(clusters) == n, "one cluster label per training row")
+    _, cluster_id, cluster_size = np.unique(clusters, return_inverse=True, return_counts=True)
+    groups = len(cluster_size)
+    require(groups >= 2, "insufficient independent policy training clusters")
+    within = 1 / cluster_size[cluster_id]
+    row_weight = within / groups
+    draws = rng.multinomial(groups, np.full(groups, 1/groups), size=config["bootstrap"]) / groups
+    weights = draws[:, cluster_id] * within
     params = [p.copy() for p in initial]
     # Reparameterize the final layer so p0=.5 at the supervised gain threshold.
     params[-2] /= config["temperature"]
@@ -54,14 +63,14 @@ def optimize(X, gain, harm, extra, initial, cutoff, limits, eta, config=CONFIG):
         cost, cw = upper(weights, prob * scale, config["upper_quantile"])
         if not np.any(harm):
             # The empirical bootstrap is degenerate. Bound P(H=1) on this training distribution.
-            risk = max(risk, 1 - (1-config["upper_quantile"])**(1/n))
+            risk = max(risk, 1 - (1-config["upper_quantile"])**(1/groups))
         if step % 25 == 0 or step == config["steps"]:
-            trace.append({"step": step, "gain": float(prob @ gain / n), "KL": float(kl.mean()),
+            trace.append({"step": step, "gain": float((prob * gain) @ row_weight), "KL": float(kl @ row_weight),
                           "risk_upper_training": risk, "extra_tokens_upper_training": cost*budget,
                           "alpha": alpha, "beta": beta, "mean_remind_probability": float(prob.mean())})
         if step == config["steps"]:
             break
-        dz = prob * (1-prob) * ((gain - eta*(logit-initial_logit))/n
+        dz = prob * (1-prob) * ((gain - eta*(logit-initial_logit))*row_weight
                                  - alpha*rw*harm - beta*cw*scale)
         dh = dz[:, None] * params[2] * (1-hidden*hidden)
         gradients = [X.T @ dh, dh.sum(axis=0), hidden.T @ dz, np.array([dz.sum()])]

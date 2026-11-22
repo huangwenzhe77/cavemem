@@ -35,4 +35,6 @@ Set `OPENAI_BASE_URL` and `OPENAI_API_KEY` in the process environment for teache
 
 The sorting environment supports development runs and policy comparisons. ALFWorld exposes the end-to-end controller pipeline. Terminal-Bench has an independent official-image pilot and a Harbor capture path. The paused Terminal-Bench pilot has yet to produce a validated held-out intervention result.
 
+The ALFWorld studies include [source memory construction](docs/alfworld-full-study.md), [historical memory transfer](docs/alfworld-transfer-study.md), and a [short-reminder gate evaluation](docs/alfworld-gate-review.md). The gate study compares silence, reminding at every eligible match, and a learned gate under the same token budget. [Aggregate results and budget audit](experiments/alfworld-short-gate/README.md)
+
 See [LICENSE](LICENSE) and [NOTICE](NOTICE) for licensing and third-party attribution.
